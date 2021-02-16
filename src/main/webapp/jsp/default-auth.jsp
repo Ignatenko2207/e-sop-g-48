@@ -1,10 +1,12 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
     <title>My e-shop</title>
 </head>
 <body>
-<h2>Hello, this is the start page!</h2>
+<h2><c:out value="${message}"/></h2>
 <br>
+
 
 <form action="authorization" method="post">
     <input type="text" name="action" value="login" hidden>
