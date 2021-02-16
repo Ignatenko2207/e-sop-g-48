@@ -5,7 +5,7 @@
 <body>
 <h3>Hello, input all data. please!</h3>
 
-<form action="authorization" method="post">
+<form action="/e_shop_g_48_war/authorization" method="post">
     <input type="text" name="action" value="register" hidden>
     <input type="text" size="40" name="login" placeholder="Input login" required>
     <br>
