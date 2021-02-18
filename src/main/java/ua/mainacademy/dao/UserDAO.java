@@ -7,10 +7,12 @@ import ua.mainacademy.factory.impl.PostgresSessionFactory;
 import ua.mainacademy.model.User;
 
 import javax.persistence.Query;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.trim;
 
 public class UserDAO extends BaseDAO<User>{
 
