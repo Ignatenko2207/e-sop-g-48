@@ -1,0 +1,41 @@
+@startuml
+
+actor "User" as user
+box "e-shop API" #lightgreen
+    participant "Controller" as cont
+    participant "Service" as serv
+    participant "DAO" as dao
+    database "DataBase" as db
+end box
+
+== Registration ==
+    user -> cont: register
+    cont -> serv: create new
+    serv -> dao: getByLogin
+    dao -> db: getByLogin
+    dao <- db: result
+    serv <- dao: result
+    serv -> serv: check result
+    alt if login is present
+        cont <- serv: creation denied
+        user <- cont: send error message \nand forward to login page
+    else if login is not present
+        serv -> dao: create new user
+        dao ->o db: save new user data
+        dao <- db: get saved user data
+        serv <- dao: get saved user
+        cont <- serv: get saved user
+        cont -> serv: find items to sell
+        serv -> dao: find items
+        dao -> db: get items data
+        dao <- db: result
+        serv <- dao: get items list
+        cont <- serv: get items
+
+        user <- cont: forward to page wit items
+    end alt
+
+
+
+
+@enduml
