@@ -2,15 +2,10 @@ package ua.mainacademy.dao;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import ua.mainacademy.model.Item;
-import ua.mainacademy.model.User;
 
 import javax.persistence.Query;
 import java.util.List;
-import java.util.Optional;
-
-import static java.util.Objects.isNull;
 
 public class ItemDAO extends BaseDAO<Item>{
 

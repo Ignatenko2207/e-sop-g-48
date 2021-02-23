@@ -9,6 +9,8 @@
 <h2><c:out value="Hello! ${userName} ${userSurname}"/></h2>
 <br>
 
+<h2><c:out value="${message}"/></h2>
+<br>
 
 <table>
     Items in order:
@@ -22,6 +24,7 @@
     <c:forEach items="${orderItems}" var="item">
         <form action="order-item", method="post">
             <tr>
+                <input type="text" name="userId" value="${userId}" hidden/>
                 <input type="text" name="orderId" value="${orderId}" hidden/>
                 <input type="text" name="itemId" value="${item.id}" hidden/>
                 <td><c:out value="${item.itemCode}"/></td>
@@ -32,19 +35,24 @@
             </tr>
         </form>
     </c:forEach>
-
+</table>
+<br>
 
 <div>
     <form action="order" metod="post">
-        <input type="text" name="action" value="closeOrder" hidden>
         <input type="text" name="userId" value="${userId}" hidden>
-        <input type="submit" value="BUY" hidden>
+        <input type="submit" value="BUY">
     </form>
 </div>
-<br>
+
 <br>
 
-</table>
+<div>
+    <form action="item">
+        <input type="text" name="userId" value="${userId}" hidden>
+        <input type="submit" value="GO BACK">
+    </form>
+</div>
 
 </body>
 </html>

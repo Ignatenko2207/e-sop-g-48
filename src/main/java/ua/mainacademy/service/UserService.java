@@ -12,13 +12,12 @@ import java.util.logging.Logger;
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 
-@RequiredArgsConstructor
 public class UserService {
 
     private static final Logger LOG = Logger.getLogger(UserService.class.getName());
-    private final UserDAO userDAO;
 
     public Optional<User> save(User user) {
+        UserDAO userDAO = new UserDAO();
         if (nonNull(user.getId())) {
             throw new RuntimeException("Creation is failed!");
         }
@@ -29,6 +28,7 @@ public class UserService {
     }
 
     public Optional<User> update(User user) {
+        UserDAO userDAO = new UserDAO();
         if (isNull(user.getId())) {
             throw new RuntimeException("Update is failed!");
         }
@@ -39,6 +39,7 @@ public class UserService {
     }
 
     public Optional<User> findOneByLoginAndPassword(String login, String password) {
+        UserDAO userDAO = new UserDAO();
         try {
             return userDAO.findOneByLoginAndPassword(login, password);
         } catch (Exception e) {
@@ -48,6 +49,7 @@ public class UserService {
     }
 
     public List<User> findAllByLogin(String login) {
+        UserDAO userDAO = new UserDAO();
         try {
             return userDAO.findAllByLogin(login);
         } catch (Exception e) {
@@ -57,6 +59,7 @@ public class UserService {
     }
 
     public Optional<User> findById(int userId) {
+        UserDAO userDAO = new UserDAO();
         try {
             return Optional.of(userDAO.findById(userId));
         } catch (Exception e) {

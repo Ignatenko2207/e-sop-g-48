@@ -20,23 +20,16 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@WebServlet(urlPatterns = "/authorization")
-public class AuthController extends HttpServlet {
-
+@WebServlet(urlPatterns = "/item")
+public class ItemController extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setCharacterEncoding("UTF-8");
-        resp.setCharacterEncoding("UTF-8");
-        resp.setHeader("Cache-Control", "no-store");
-
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         UserService userService = new UserService();
         ItemService itemService = new ItemService();
-
         RequestDispatcher dispatcher;
-        String login = req.getParameter("login");
-        String password = req.getParameter("password");
-        Optional<User> optUser = userService.findOneByLoginAndPassword(login, password);
+        String userId = req.getParameter("userId");
+        Optional<User> optUser = userService.findById(Integer.parseInt(userId));
 
         if (optUser.isPresent()) {
             req.setAttribute("userId", optUser.get().getId());
@@ -46,12 +39,7 @@ public class AuthController extends HttpServlet {
             resp.addCookie(new Cookie("x-auth", Base64Util.getEncodedUserData(optUser.get())));
             dispatcher = req.getRequestDispatcher("/jsp/items.jsp");
             dispatcher.forward(req, resp);
-        } else {
-            req.setAttribute("message", "Wrong login or password. Please try again.");
-            dispatcher = req.getRequestDispatcher("/jsp/default-auth.jsp");
-            dispatcher.forward(req, resp);
         }
-
     }
 
     private List<ItemDTO> toItemDTOList(List<Item> items) {

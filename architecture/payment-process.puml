@@ -5,8 +5,8 @@ box "e-shop API" #lightgreen
     participant "Controller" as cont
     participant "Service" as serv
     participant "DAO" as dao
-    database "DataBase" as db
 end box
+    database "DataBase" as db
 
 == Registration ==
     user -> cont: register

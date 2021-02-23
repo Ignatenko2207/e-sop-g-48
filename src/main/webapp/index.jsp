@@ -7,7 +7,6 @@
 <br>
 
 <form action="authorization" method="post">
-    <input type="text" name="action" value="login" hidden>
     <input type="text" size="40" name="login" placeholder="Input login" required>
     <br>
     <input type="password" size="40" name="password" placeholder="Input password" required>
@@ -16,7 +15,7 @@
 </form>
 <br>
 <h3>
-    <a href="/e_shop_g_48_war/jsp/registration.jsp">REGISTER NEW USER</a>
+    <a href="/jsp/registration.jsp">REGISTER NEW USER</a>
 </h3>
 </body>
 </html>

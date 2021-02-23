@@ -11,7 +11,7 @@
 <div>
     <form action="order">
         <input type="text" name="userId" value="${userId}" hidden>
-        <input type="submit" value="GO TO OPEN CART" hidden>
+        <input type="submit" value="GO TO OPEN CART">
     </form>
 </div>
 <br>
@@ -30,7 +30,6 @@
     <c:forEach items="${items}" var="item">
         <form action="order-item", method="post">
             <tr>
-                <input type="text" name="action" value="addToCart" hidden/>
                 <input type="text" name="userId" value="${userId}" hidden/>
                 <input type="text" name="itemId" value="${item.id}" hidden/>
                 <td><c:out value="${item.itemCode}"/></td>
