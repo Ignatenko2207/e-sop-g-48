@@ -1,5 +1,6 @@
 package ua.mainacademy.controller.filter;
 
+import org.apache.commons.lang3.StringUtils;
 import ua.mainacademy.model.User;
 import ua.mainacademy.service.UserService;
 import ua.mainacademy.util.Base64Util;
@@ -18,8 +19,9 @@ import java.util.Optional;
 import static java.util.Objects.isNull;
 
 @WebFilter(urlPatterns = {
-        "/order",
-        "/order-item"
+        "/open-order",
+        "/order-item",
+        "/item"
 })
 public class UserFilter extends HttpFilter {
 
@@ -45,7 +47,8 @@ public class UserFilter extends HttpFilter {
         String userData[] = Base64Util.getDecodedString(xAuth).split(":");
         UserService userService = new UserService();
         Optional<User> user = userService.findOneByLoginAndPassword(userData[0], userData[1]);
-        if (user.isPresent()) {
+        String userId = req.getParameter("userId");
+        if (user.isPresent() && StringUtils.equals(user.get().getId().toString(), userId)) {
             super.doFilter(req, res, chain);
         } else {
             req.setAttribute("message", "Authorization is failed! User data is wrong.");

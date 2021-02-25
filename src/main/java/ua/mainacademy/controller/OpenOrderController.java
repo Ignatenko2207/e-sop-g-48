@@ -34,28 +34,27 @@ public class OpenOrderController extends HttpServlet {
 
         UserService userService = new UserService();
         OrderService orderService = new OrderService();
+        OrderItemService orderItemService = new OrderItemService();
 
         String userId = req.getParameter("userId");
 
-        Optional<User> optUser = userService.findById(Integer.parseInt(userId));
-        if (optUser.isPresent()) {
-            Order order = orderService.findOpenOrderOrCreateNew(optUser.get());
-            OrderItemService orderItemService = new OrderItemService();
-            List<OrderItemDTO> orderItemDTOList = orderItemService.findAllOrderItemByOrder(order)
-                    .stream()
-                    .map(OrderItemMapper::toOrderItemDTO)
-                    .collect(Collectors.toList());
+        Optional<User> optUser = Optional.ofNullable(userService.findById(Integer.parseInt(userId)))
+                .orElseThrow(() -> new RuntimeException(String.format("User with id %s was not found", userId)));
+        Order order = orderService.findOpenOrderOrCreateNew(optUser.get());
+        List<OrderItemDTO> orderItemDTOList = orderItemService.findAllOrderItemByOrder(order)
+                .stream()
+                .map(OrderItemMapper::toOrderItemDTO)
+                .collect(Collectors.toList());
 
-            req.setAttribute("userId", userId);
-            req.setAttribute("userName", optUser.get().getFirstName());
-            req.setAttribute("userSurname", optUser.get().getLastName());
-            req.setAttribute("message", getMessage(orderItemDTOList));
-            req.setAttribute("orderItems", orderItemDTOList);
-            req.setAttribute("orderId", order.getId());
-            resp.addCookie(new Cookie("x-auth", Base64Util.getEncodedUserData(optUser.get())));
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/jsp/open-order.jsp");
-            dispatcher.forward(req, resp);
-        }
+        req.setAttribute("userId", userId);
+        req.setAttribute("userName", optUser.get().getFirstName());
+        req.setAttribute("userSurname", optUser.get().getLastName());
+        req.setAttribute("message", getMessage(orderItemDTOList));
+        req.setAttribute("orderItems", orderItemDTOList);
+        req.setAttribute("orderId", order.getId());
+        resp.addCookie(new Cookie("x-auth", Base64Util.getEncodedUserData(optUser.get())));
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/jsp/open-order.jsp");
+        dispatcher.forward(req, resp);
     }
 
     private String getMessage(List<OrderItemDTO> orderItemDTOList) {
