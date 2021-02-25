@@ -5,7 +5,7 @@
 <body>
 <h3>Hello, input all data. please!</h3>
 
-<form action="registration" method="post">
+<form action="/registration" method="post">
     <input type="text" size="40" name="login" placeholder="Input login" required>
     <br>
     <input type="password" size="40" name="password" placeholder="Input password" required>
@@ -23,7 +23,7 @@
 
 <br>
 <h3>
-    <a href="/e_shop_g_48_war/index.jsp">GO BACK!</a>
+    <a href="/index.jsp">GO BACK!</a>
 </h3>
 
 </body>

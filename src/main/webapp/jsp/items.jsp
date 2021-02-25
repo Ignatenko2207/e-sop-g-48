@@ -9,7 +9,7 @@
 <h2><c:out value="Hello! ${userName} ${userSurname}"/></h2>
 <br>
 <div>
-    <form action="order">
+    <form action="/open-order">
         <input type="text" name="userId" value="${userId}" hidden>
         <input type="submit" value="GO TO OPEN CART">
     </form>
@@ -28,7 +28,7 @@
         <th>BUY</th>
     </tr>
     <c:forEach items="${items}" var="item">
-        <form action="order-item", method="post">
+        <form action="/order-item-add", method="post">
             <tr>
                 <input type="text" name="userId" value="${userId}" hidden/>
                 <input type="text" name="itemId" value="${item.id}" hidden/>

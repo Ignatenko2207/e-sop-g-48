@@ -8,7 +8,7 @@
 <h2><c:out value="${message}"/></h2>
 <br>
 
-<form action="authorization" method="post">
+<form action="/authorization" method="post">
     <input type="text" size="40" name="login" placeholder="Input login" required>
     <br>
     <input type="password" size="40" name="password" placeholder="Input password" required>

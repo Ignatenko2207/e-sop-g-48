@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 public class RegistrationController extends HttpServlet {
 
     @Override
-    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
         resp.setHeader("Cache-Control", "no-store");

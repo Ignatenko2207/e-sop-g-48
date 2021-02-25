@@ -23,8 +23,8 @@ import java.util.stream.Collectors;
 
 import static java.util.Objects.isNull;
 
-@WebServlet(urlPatterns = "/order")
-public class OrderController extends HttpServlet {
+@WebServlet(urlPatterns = "/open-order")
+public class OpenOrderController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

@@ -22,7 +22,7 @@
         <th>DELETE</th>
     </tr>
     <c:forEach items="${orderItems}" var="item">
-        <form action="order-item", method="post">
+        <form action="/order-item-delete", method="post">
             <tr>
                 <input type="text" name="userId" value="${userId}" hidden/>
                 <input type="text" name="orderId" value="${orderId}" hidden/>
@@ -39,7 +39,7 @@
 <br>
 
 <div>
-    <form action="order" metod="post">
+    <form action="/order" metod="post">
         <input type="text" name="userId" value="${userId}" hidden>
         <input type="submit" value="BUY">
     </form>
@@ -48,7 +48,7 @@
 <br>
 
 <div>
-    <form action="item">
+    <form action="/item">
         <input type="text" name="userId" value="${userId}" hidden>
         <input type="submit" value="GO BACK">
     </form>
