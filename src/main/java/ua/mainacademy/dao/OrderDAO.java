@@ -17,11 +17,11 @@ public class OrderDAO extends BaseDAO<Order>{
         String sql = "" +
                 "SELECT * " +
                 "FROM orders " +
-                "WHERE user_id=1? " +
-                "AND status=2?";
+                "WHERE user_id=?1 " +
+                "AND status=?2";
         Query query = session.createNativeQuery(sql, Order.class);
         query.setParameter(1, userId);
-        query.setParameter(2, Order.Status.OPEN);
+        query.setParameter(2, 0);
         Order result = (Order) query.getSingleResult();
         session.close();
         return result;
